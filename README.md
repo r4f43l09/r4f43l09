@@ -1,21 +1,20 @@
-// minhaFuncao.js
-function retornaMensagem() {
-  return "Olá, esta é a mensagem da minha função!";
-}
+import React, { useState } from 'react';
 
-export default retornaMensagem;
+function MeuComponente() {
+  // Defina um estado usando o hook useState
+  const [valor, setValor] = useState(0);
 
-import React from 'react';
-import retornaMensagem from './minhapasta/minhaFuncao';
-
-function App() {
-  const mensagem = retornaMensagem();
+  // Função para aumentar o valor
+  const aumentarValor = () => {
+    setValor(valor + 1);
+  };
 
   return (
     <div>
-      <h1>{mensagem}</h1>
+      <p>Valor: {valor}</p>
+      <button onClick={aumentarValor}>Aumentar Valor</button>
     </div>
   );
 }
 
-export default App;
+export default MeuComponente;
