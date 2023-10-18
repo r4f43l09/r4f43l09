@@ -2,22 +2,28 @@ const express = require('express');
 const app = express();
 const port = 8080;
 
-// Middleware para permitir o uso de JSON nas requisições POST
-app.use(express.json());
-
-// Rota para lidar com requisições GET
+// Rota estática
 app.get('/', (req, res) => {
-  res.send('Rota GET: Olá, mundo!');
+  res.send('Rota estática: Página inicial');
 });
 
-// Rota para lidar com requisições POST
-app.post('/', (req, res) => {
-  // Você pode acessar os dados do corpo da requisição POST assim: req.body
-  console.log('Dados recebidos no POST:', req.body);
-  res.send('Rota POST: Dados recebidos com sucesso!');
+// Rota dinâmica com placeholder
+app.get('/user/:id', (req, res) => {
+  const userId = req.params.id;
+  res.send(`Rota dinâmica: Exibindo informações do usuário com ID ${userId}`);
 });
 
-// Inicie o servidor na porta 8080
+// Rota com query parameter
+app.get('/search', (req, res) => {
+  const query = req.query.q;
+  res.send(`Rota com query parameter: Pesquisando por "${query}"`);
+});
+
+// Rota 404 para lidar com rotas não definidas
+app.use((req, res) => {
+  res.status(404).send('Página não encontrada');
+});
+
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
